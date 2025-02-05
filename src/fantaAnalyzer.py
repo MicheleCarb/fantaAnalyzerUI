@@ -19,7 +19,8 @@ st.markdown("---")
 st.header("💰 Players Opportunity")
 
 # Load the latest giornata dynamically
-DATA_FOLDER = "../data"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "../data"))  # Adjust path
 giornate_dir = os.path.join(DATA_FOLDER, year, "giornate")
 db_path = os.path.join(DATA_FOLDER, year, "fantacalcio.db")
 

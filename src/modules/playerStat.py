@@ -2,9 +2,12 @@ import os
 import sqlite3
 import matplotlib.pyplot as plt
 import streamlit as st
+from modules.config import year
 
-DATA_FOLDER = "../data"
-year = "2024-25"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "../../data"))  # Adjust path
+#DATA_FOLDER = "../data"
+DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "../../data"))  # Adjust path
 DB_PATH = os.path.join(DATA_FOLDER, year, "fantacalcio.db")
 
 def fetch_player_stats(player_name):

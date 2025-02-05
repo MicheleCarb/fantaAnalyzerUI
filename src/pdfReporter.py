@@ -11,12 +11,14 @@ import streamlit as st
 
 from modules.config import year
 
-DATA_FOLDER = "../data"
-REPORT_FOLDER = f"../data/{year}/report"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, f"../data/{year}/fantacalcio.db"))  # Adjust path
+#REPORT_FOLDER = f"../data/{year}/report"
+REPORT_FOLDER = os.path.abspath(os.path.join(BASE_DIR, f"../data/{year}/report"))  # Adjust path
 
 def execute_query(query):
-    global year
-    connection = sqlite3.connect(f"../data/{year}/fantacalcio.db")
+    print(f"Connecting to database at: {DATA_FOLDER}")
+    connection = sqlite3.connect(DATA_FOLDER)
     cursor = connection.cursor()
     cursor.execute(query)
     rows = cursor.fetchall()

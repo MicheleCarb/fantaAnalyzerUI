@@ -1,6 +1,7 @@
 import os
 
-DATA_FOLDER = "../data"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "../../data"))  # Adjust path
 
 def trova_stagione_piu_recente():
     """Finds the most recent season by scanning available folders."""
