@@ -5,6 +5,7 @@ import json
 import re
 import sys
 import glob
+from modules.config import year
 
 # Funzione per trovare il file delle quotazioni
 def trova_file_quotazioni(cartella_giornata):
@@ -125,9 +126,12 @@ def main(stagione, giornata):
     DATA_FOLDER = "../data"
     base_folder_path = os.path.join(DATA_FOLDER, stagione, "giornate")
 
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+    DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, f"../data/{year}/fantacalcio.db"))  # Adjust path
+
     # Crea la connessione al database
-    db_path = os.path.join(DATA_FOLDER, stagione, "fantacalcio.db")
-    conn = sqlite3.connect(db_path)
+    #db_path = os.path.join(DATA_FOLDER, stagione, "fantacalcio.db")
+    conn = sqlite3.connect(DATA_FOLDER)
 
     # Crea le tabelle nel database
     create_tables(conn)

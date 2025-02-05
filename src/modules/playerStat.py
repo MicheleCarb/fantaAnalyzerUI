@@ -7,7 +7,6 @@ from modules.config import year
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get current directory
 DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "../../data"))  # Adjust path
 #DATA_FOLDER = "../data"
-DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "../../data"))  # Adjust path
 DB_PATH = os.path.join(DATA_FOLDER, year, "fantacalcio.db")
 
 def fetch_player_stats(player_name):

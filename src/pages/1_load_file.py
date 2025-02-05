@@ -14,6 +14,12 @@ if st.button("🏠 Torna alla Homepage"):
 DATA_FOLDER = "../data"
 SCRIPT_PATH = "dbFiller.py"
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "../../data"))  # Adjust path
+#DATA_FOLDER = "../data"
+#SCRIPT_PATH = "/src/dbFiller.py"
+SCRIPT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../dbFiller.py"))  # Adjust path
+
 # Funzione per cancellare la cartella della giornata
 def cancella_cartella_giornata(stagione, giornata):
     giornata_folder = os.path.join(DATA_FOLDER, stagione, "giornate", str(giornata))

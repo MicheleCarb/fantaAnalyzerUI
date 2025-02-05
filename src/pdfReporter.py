@@ -17,7 +17,7 @@ DATA_FOLDER = os.path.abspath(os.path.join(BASE_DIR, f"../data/{year}/fantacalci
 REPORT_FOLDER = os.path.abspath(os.path.join(BASE_DIR, f"../data/{year}/report"))  # Adjust path
 
 def execute_query(query):
-    print(f"Connecting to database at: {DATA_FOLDER}")
+    #print(f"Connecting to database at: {DATA_FOLDER}")
     connection = sqlite3.connect(DATA_FOLDER)
     cursor = connection.cursor()
     cursor.execute(query)
