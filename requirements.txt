@@ -1,0 +1,5 @@
+streamlit==1.32.2
+pandas==2.1.4
+sqlite3==3.41.2  # Di solito incluso, ma meglio specificare
+reportlab==4.0.4
+openpyxl==3.1.2
