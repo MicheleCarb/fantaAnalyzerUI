@@ -7,10 +7,10 @@ from modules.playerStat import fetch_player_stats, create_plot, get_all_players
 from modules.config import year
 
 # Set up page title
-st.title("📊 Fantacalcio Data Manager")
+st.title("📊 FantaAnalyzer")
 
 # Description of the app
-st.write("Benvenuto nel Fantacalcio Data Manager! Qui puoi analizzare i dati del tuo fantacalcio o trovare opportunità di mercato.")
+st.write("Benvenuto in FantaAnalyzer! Qui puoi analizzare i dati del tuo fantacalcio o trovare opportunità di mercato.")
 
 # Divider
 st.markdown("---")
@@ -30,11 +30,11 @@ except ValueError:
     latest_giornata = None
 
 if latest_giornata and latest_giornata > 1:
-    st.write(f"Showing player opportunities for Giornata {latest_giornata}")
+    st.write(f"Mostra opportunità che si sono create dopo la giornata {latest_giornata}. Le opportunità non sono altro che giocatori che hanno perso valore in questa giornata.")
 
     # User inputs
-    crediti = st.number_input("Enter maximum credits (optional):", min_value=0, step=1, value=None)
-    ruolo = st.selectbox("Select role (optional):", ["All", "P", "D", "C", "A"])
+    crediti = st.number_input("Inserisci numero massimo di crediti (opzionale):", min_value=0, step=1, value=None)
+    ruolo = st.selectbox("Seleziona ruolo (opzionale):", ["All", "P", "D", "C", "A"])
 
     # Convert "All" to None for the function
     if ruolo == "All":
