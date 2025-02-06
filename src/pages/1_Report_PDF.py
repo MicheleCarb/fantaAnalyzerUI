@@ -36,8 +36,8 @@ if selected_report:
     show_pdf(f"{REPORT_FOLDER}/{selected_report}")
 
 with col1:
-    if st.button("🏠 Torna alla Homepage", key="pdf_home"):
-        st.switch_page("../fantaAnalyzer.py")
+    if st.button("🏠 Torna alla Homepage"):
+        st.switch_page("fantaAnalyzer.py")  # Torna al file principale
     
     # Nascondi il pulsante "Genera Nuovo Report" se il report dell'ultima giornata esiste già
     if not os.path.exists(latest_report_path):
