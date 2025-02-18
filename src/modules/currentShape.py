@@ -53,30 +53,46 @@ def get_next_game_number():
         conn.close()
 
 def calculate_difficulty_index(team_entry, form_table):
-    """Original calculation logic preserved"""
+    """Calcola l'indice di difficoltà considerando il PPG della squadra e degli avversari"""
     total = 0.0
     valid_matches = 0
     
+    # Ottieni il PPG della squadra analizzata
+    try:
+        team_ppg = float(team_entry['PPG'])
+    except (KeyError, ValueError):
+        return 0.0  # Gestione errore se PPG non disponibile
+    
     for match in team_entry.get('Next Matches', []):
+        # Estrai avversario e contesto
         if ' (HOME)' in match:
             opponent = match.replace(' (HOME)', '').strip()
-            weight = 0.9
+            weight = 1.1  # Scontiamo la difficoltà in casa
         elif ' (AWAY)' in match:
             opponent = match.replace(' (AWAY)', '').strip()
-            weight = 1.1
+            weight = 0.9  # Aumentiamo la difficoltà in trasferta
         else:
             continue
         
+        # Trova i dati dell'avversario
         opponent_data = next((t for t in form_table if t['Team'] == opponent), None)
         if opponent_data and opponent_data['PPG']:
             try:
-                ppg = float(opponent_data['PPG'])
-                total += ppg * weight
+                opponent_ppg = float(opponent_data['PPG'])
+                
+                # Nuova formula: differenza relativa pesata
+                difficulty_ratio = (opponent_ppg * weight) / (team_ppg + 1e-6)  # +1e-6 evita divisione per zero
+                total += difficulty_ratio
                 valid_matches += 1
             except ValueError:
                 continue
     
-    return round(total / valid_matches, 2) if valid_matches > 0 else 0.0
+    if valid_matches == 0:
+        return 0.0
+        
+    # Calcola la media e normalizza
+    average_difficulty = total / valid_matches
+    return round(average_difficulty, 2)
 
 def get_hidden_url():
     # I mean hidden.. it's base64
