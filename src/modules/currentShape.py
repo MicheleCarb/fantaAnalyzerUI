@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import sqlite3
 import os
 import ast
+import base64
+
 from modules.config import year  # Import from correct location
 
 def get_db_path():
@@ -76,9 +78,15 @@ def calculate_difficulty_index(team_entry, form_table):
     
     return round(total / valid_matches, 2) if valid_matches > 0 else 0.0
 
+def get_hidden_url():
+    # I mean hidden.. it's base64
+    encoded = "aHR0cHM6Ly9mb290eXN0YXRzLm9yZy9pdC9pdGFseS9zZXJpZS1hL2Zvcm0tdGFibGU="
+    return base64.b64decode(encoded).decode()
+
 def scrape_form_table():
     """Original scraping logic preserved without modifications"""
-    url = "https://footystats.org/it/italy/serie-a/form-table"
+
+    url = get_hidden_url()
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Accept-Language': 'en-US,en;q=0.9'
